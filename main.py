@@ -2,7 +2,7 @@
 
 import json
 import re
-from logic import (find_summary_symbols_in_file,
+from api import (find_summary_symbols_in_file,
                             find_summary_symbols_cut_in_file,
                             find_element_with_key_where_most_symbols,
                             find_value_in_array_with_key_where_most_words)
