@@ -109,6 +109,7 @@ def find_value_in_array_with_key_where_most_words(list_objects, key):
             elif(len(i.split(' ')) == len(candidates[0].split(' ')) and not(i in candidates) 
                   and validation_emty_elements_list(i)):
                 candidates.append(i)
+                
     
     #Result
     return candidates
