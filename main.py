@@ -1,7 +1,6 @@
 
 
 import json
-import re
 from api import (find_summary_symbols_in_file,
                             find_summary_symbols_cut_in_file,
                             find_element_with_key_where_most_symbols,

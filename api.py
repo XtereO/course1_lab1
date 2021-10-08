@@ -1,4 +1,7 @@
 
+import re
+
+
 #Validators
 def validation_list(value):
     if(not(value) or 
@@ -48,13 +51,15 @@ def find_summary_symbols_cut_in_file(file_name):
         return 'File name must be string'
         
      
-    #Read file and generate answer
+    #Read file
     file = open(file_name, 'r') 
     
+    
+    #Generate answer and close file
     summary_symbols_cut = 0
     for a in file: 
         summary_symbols_cut+=len(
-            re.sub(r'[,.;:?!-() ]','',a).replace(' ','')
+            re.sub(r'[,.;:?!-()]','',a).replace(' ','').replace('[','').replace(']','').replace('"','').strip()
         )
     file.close()
     
