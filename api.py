@@ -1,38 +1,35 @@
 
 import re
 
+# Validators
+def is_empy_list(input_list):
+    return False if input_list and isinstance(input_list, list) else True
 
-#Validators
-def validation_list(value):
-    if(not(value) or 
-       type(value) != type([]) or len(value)==0):
+def is_empy_value(value):
+    if isinstance(value, (int, float)):
         return False
-    return True
-
-def validation_key_list(list_objects, key):
-    if(not(key) or 
-       type(key) != type('str') or not(key in list_objects[0])):
-        return False
-    return True
-
-def validation_emty_elements_list(check_list):
-    if(type('str')==type(check_list)):
-        check_list=check_list.split(' ')
-    if(not('' in check_list) and not(' ' in  check_list)):
+    elif value:
+        if isinstance(value, str) and not value.isspace():
+            return False
+        elif isinstance(value, list):
+            if '' in [str(i).strip() for i in value]:
+                return  False
+        elif isinstance(value, dict):
+            return False
         return True
-    return False
+    else:
+        return True
 
-
-#Main functions
+# Main functions
 def find_summary_symbols_in_file(file_name):
     
     
-    #Validation arguments
+    # Validation arguments
     if(type('str')!=type(file_name)):
         return 'File name must be string'
         
      
-    #Read file and generate answer
+    # Read file and generate answer
     file = open(file_name, 'r') 
     
     summary_symbols = 0
@@ -40,22 +37,22 @@ def find_summary_symbols_in_file(file_name):
     file.close()
     
     
-    #Result
+    # Result
     return summary_symbols
 
 def find_summary_symbols_cut_in_file(file_name):
     
     
-    #Validation arguments
+    # Validation arguments
     if(type('str')!=type(file_name)):
         return 'File name must be string'
         
      
-    #Read file
+    # Read file
     file = open(file_name, 'r') 
     
     
-    #Generate answer and close file
+    # Generate answer and close file
     summary_symbols_cut = 0
     for a in file: 
         summary_symbols_cut+=len(
@@ -64,52 +61,50 @@ def find_summary_symbols_cut_in_file(file_name):
     file.close()
     
     
-    #Result
+    # Result
     return summary_symbols_cut
 
 def find_element_with_key_where_most_symbols(list_objects, key):
 
 
-    #Validation arguments
-    if(not(validation_list(list_objects))):
+    # Validation arguments
+    if is_empy_list(list_objects):
         return 'List value is incorrect'
-    if(not(validation_key_list(list_objects,key))):
-        return 'Key value is incorrect'
     
     
-    #Looking for candidates 
+    # Looking for candidates 
     candidates = [list_objects[0]]
     for a in list_objects[1:]:
-        if(len(a[key]) > len(candidates[0][key])):
+        if len(a[key]) > len(candidates[0][key]):
             candidates = [a]
-        elif(len(a[key]) == len(candidates[0][key]) and not(a in candidates)):
+        elif (len(a[key]) == len(candidates[0][key]) and not(a in candidates)):
             candidates.append(a)
     
 
-    #Result
+    # Result
     return candidates
 
 def find_value_in_array_with_key_where_most_words(list_objects, key):
 
 
-    #Validation arguments
-    if(not(validation_list(list_objects))):
+    # Validation arguments
+    if(is_empy_list(list_objects)):
         return 'List value is incorrect'
-    if(not(validation_key_list(list_objects,key))):
-        return 'Key value is incorrect'
-    
-    
-    
-    #Looking for a candidates 
-    candidates = ['']
-    for a in list_objects:
-        for i in a[key]:
-            if(len(i.split(' ')) > len(candidates[0].split(' ')) and validation_emty_elements_list(i)):
-                candidates = [i]
-            elif(len(i.split(' ')) == len(candidates[0].split(' ')) and not(i in candidates) 
-                  and validation_emty_elements_list(i)):
-                candidates.append(i)
-                
-    
-    #Result
+
+
+    # Looking for a candidates
+    candidates = set()
+    max_current = 0
+    for pokemon in list_objects:
+        for param in pokemon[key]:
+            amount_word = len(param.split())
+            if amount_word > max_current:
+                max_current = amount_word
+                candidates.clear()
+                candidates.add(param)
+            elif amount_word == max_current:
+                candidates.add(param)
+
+
+    # Result
     return candidates
