@@ -1,5 +1,6 @@
 import re
 
+
 # Validators
 def is_empy_list(input_list):
     return False if input_list and isinstance(input_list, list) else True
