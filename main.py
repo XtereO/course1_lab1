@@ -1,5 +1,3 @@
-
-
 import json
 
 from api import (find_summary_symbols_in_file,
