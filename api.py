@@ -22,18 +22,15 @@ def is_empy_value(value):
 
 # Main functions
 def find_summary_symbols_in_file(file):
-       
      
     # Read file and generate answer
     summary_symbols = 0
     for a in file: summary_symbols+=len(a)
     
-    
     # Result
     return summary_symbols
 
 def find_summary_symbols_cut_in_file(file):
-    
     
     # Generate answer and close file
     summary_symbols_cut = 0
@@ -42,18 +39,15 @@ def find_summary_symbols_cut_in_file(file):
             re.sub(r'[,.;:?!-()]','',a).replace(' ','').replace('[','').replace(']','').replace('"','').strip()
         )
         
-    
     # Result
     return summary_symbols_cut
 
 def find_element_with_key_where_most_symbols(list_objects, key):
 
-
     # Validation arguments
     if is_empy_list(list_objects):
         return 'List value is incorrect'
-    
-    
+        
     # Looking for candidates 
     candidates = [list_objects[0]]
     for a in list_objects[1:]:
@@ -62,17 +56,14 @@ def find_element_with_key_where_most_symbols(list_objects, key):
         elif (len(a[key]) == len(candidates[0][key]) and not(a in candidates)):
             candidates.append(a)
     
-
     # Result
     return candidates
 
 def find_value_in_array_with_key_where_most_words(list_objects, key):
 
-
     # Validation arguments
     if(is_empy_list(list_objects)):
         return 'List value is incorrect'
-
 
     # Looking for a candidates
     candidates = set()
@@ -86,7 +77,6 @@ def find_value_in_array_with_key_where_most_words(list_objects, key):
                 candidates.add(param)
             elif amount_word == max_current:
                 candidates.add(param)
-
 
     # Result
     return candidates
