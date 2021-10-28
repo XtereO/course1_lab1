@@ -21,35 +21,18 @@ def is_empy_value(value):
         return True
 
 # Main functions
-def find_summary_symbols_in_file(file_name):
-    
-    
-    # Validation arguments
-    if(type('str')!=type(file_name)):
-        return 'File name must be string'
-        
+def find_summary_symbols_in_file(file):
+       
      
     # Read file and generate answer
-    file = open(file_name, 'r') 
-    
     summary_symbols = 0
     for a in file: summary_symbols+=len(a)
-    file.close()
     
     
     # Result
     return summary_symbols
 
-def find_summary_symbols_cut_in_file(file_name):
-    
-    
-    # Validation arguments
-    if(type('str')!=type(file_name)):
-        return 'File name must be string'
-        
-     
-    # Read file
-    file = open(file_name, 'r') 
+def find_summary_symbols_cut_in_file(file):
     
     
     # Generate answer and close file
@@ -58,8 +41,7 @@ def find_summary_symbols_cut_in_file(file_name):
         summary_symbols_cut+=len(
             re.sub(r'[,.;:?!-()]','',a).replace(' ','').replace('[','').replace(']','').replace('"','').strip()
         )
-    file.close()
-    
+        
     
     # Result
     return summary_symbols_cut
